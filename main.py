@@ -33,9 +33,9 @@ def set_accessory_data():
 
 
 ### SCRAPE AND SET TO DB
-# set_shoes_data()
-# set_clothing_data()
-# set_accessory_data()
+set_shoes_data()
+set_clothing_data()
+set_accessory_data()
 
 
 # data = mongodb.get_accessories()
@@ -46,12 +46,12 @@ def set_accessory_data():
 # print(count)
 
 
-ans = mongodb.price_range(50, "women", "shoes")
-if ans:
-    for a in ans:
-        print(a)
-else:
-    print("Nothing")
+# ans = mongodb.price_range(50, "women", "shoes")
+# if ans:
+#     for a in ans:
+#         print(a)
+# else:
+#     print("Nothing")
 
 
 ### MINIMUM AND MAXIMUM

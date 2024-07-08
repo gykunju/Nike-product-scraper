@@ -32,6 +32,8 @@ def scrape_data(url):
         category = "clothing"
     elif re.search("accessories", url):
         category = "accessories"
+
+    img = "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/4e2229e5-22a4-46ac-897b-6860c0a57974/dunk-low-premium-next-nature-womens-shoes-xW59Qz.png"
     
     soup = scrap(url)
     if soup:
@@ -40,7 +42,7 @@ def scrape_data(url):
         products = []
 
         a_cards = soup.find_all("a", class_="product-card__link-overlay")
-         
+        
         count = 0
         for card in product_cards:
             title_div = card.find("div", class_="product-card__title")
@@ -60,7 +62,7 @@ def scrape_data(url):
             
             link = a_cards[count]['href']
             count+=1
-            products.append({"name": title, "link": link, "price": price, "group": group, "category": category, "description": description})
+            products.append({"name": title, "link": link, "img": img, "price": price, "group": group, "category": category, "description": description})
 
         print("Products acquired")
         return products

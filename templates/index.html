@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+
+<h1>NIKE COLLECTION</h1>
+
+<nav>
+    <ul class="select">
+        <li><a class="nav-link" href="/men">Men</a></li>
+        <li><a class="nav-link" href="/women">Women</a></li>
+        <li><a class="nav-link" href="/kids">Kids</a></li>
+    </ul>
+</nav>
+<nav>
+    <ul class="select" id="second-navbar">
+        <li><a href="/men">All</a></li>
+        <li><a class="nav-link" href="#" data-append="/shoes">Shoes</a></li>
+        <li><a class="nav-link" href="#" data-append="/clothing">Clothing</a></li>
+        <li><a class="nav-link" href="#" data-append="/accessories">Accessories</a></li>
+    </ul>
+</nav>
+
+<div>
+    <div class="roe">
+        <h2>{{ head }}</h2>
+        <form method="GET" action="{{ url_for('filter_by_price') }}">
+            <input id="price" name="price" type="number" placeholder="Enter price limit..."/>
+            <button type="submit">Filter</button>
+        </form>
+    </div>
+    <h4>{{ filter_head }}</h4>
+    <div class="container">
+        
+        {% for d in data %}
+            <div class="card">
+                <a href='{{d.link}}'>
+                <img src='{{ d.img }}'/>
+                <h4>{{ d.name }}</h4>
+                <p>{{ d.category }}</p>
+                <p>{{ d.description }}</p>
+                <span>${{ d.price }}</span>
+                </a>
+            </div> 
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const secondNavbarLinks = document.querySelectorAll("#second-navbar a");
+    const currentUrl = window.location.pathname;
+
+    secondNavbarLinks.forEach(link => {
+        link.addEventListener("click", function(event) {
+            event.preventDefault();
+            const appendPath = link.getAttribute("data-append");
+            let newUrl;
+            // navLinks.forEach(link => link.classList.remove("active"));
+            
+            if (appendPath) {
+                if (currentUrl.includes("/filter_by_price")){
+                    currentUrl = "/" + appendPath
+                }
+
+                newUrl = currentUrl.replace(/\/shoes|\/clothing|\/accessories/g, '') + appendPath;
+            } else {
+                newUrl = currentUrl.replace(/\/shoes|\/clothing|\/accessories/g, '');
+            }
+            window.location.href = newUrl;
+            // this.classList.add("active");
+        });
+    });
+});
+</script>
+
+{% endblock %}
